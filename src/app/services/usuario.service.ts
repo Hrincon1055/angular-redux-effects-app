@@ -11,7 +11,12 @@ export class UsuarioService {
   constructor(private _http: HttpClient) {}
   public getUsers(): Observable<Usuario[]> {
     return this._http
-      .get<Usuario[]>(`${this._url}/users?per_page=6`)
-      .pipe(map((response: any) => response.data));
+      .get<Usuario[]>(`${this._url}/users?per_page=6&delay=6`)
+      .pipe(map((usuarios: any) => usuarios['data']));
+  }
+  public getUserById(id: string): Observable<Usuario> {
+    return this._http
+      .get<Usuario[]>(`${this._url}/users/${id}`)
+      .pipe(map((usuario: any) => usuario['data']));
   }
 }
